@@ -1,0 +1,16 @@
+name: poetry-publish
+on:
+  # https://docs.github.com/cn/actions/using-workflows/events-that-trigger-workflows#release
+  release:
+    types: [published]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      # https://github.com/marketplace/actions/publish-python-poetry-package
+      - name: Build and publish to pypi
+        uses: JRubics/poetry-publish@v1.17
+        with:
+          pypi_token: ${{ secrets.PYPI_API_TOKEN }}
